@@ -11,8 +11,14 @@ public class LevelController : MonoBehaviour {
     public GameObject Player_1;
     public GameObject Player_2;
 
+    public int MaxSquares = 1;
+    public int MaxCircles = 1;
+    [HideInInspector]
     public int Score = 0;
-    public int Stars = 0;
+    [HideInInspector]
+    public int Circles = 0;
+    [HideInInspector]
+    public int Squares = 0;
     public float LevelTime = 300;
     [HideInInspector]
     public float TimePassed = 0;
@@ -43,6 +49,13 @@ public class LevelController : MonoBehaviour {
 	void Update () {
         UpdateTime();
 	}
+    void CheckIfWon()
+    {
+        if(Circles >= MaxCircles && Squares >= MaxSquares)
+        {
+            GameOver();
+        }
+    }
     void UpdateTime()
     {
         if(Alive)
@@ -52,25 +65,36 @@ public class LevelController : MonoBehaviour {
     }
     public void TakeDamage()
     {
-        _health--; 
-        if (_health <= 0)
-        {
-            _health = 0;
-            GameOver();
-        }
+        //_health--; 
+        //if (_health <= 0)
+        //{
+        //    _health = 0;
+        //    GameOver();
+        //}
+        TimePassed += 15;
         GameMenuController.Instance.UpdateHealthPacks();
     }
     public void AddScore(int score)
     {
         Score += score;
     }
-    public void AddStar()
+    public void AddCircles()
     {
-        Stars++;
+        Circles++;
+        CheckIfWon();
+    }
+    public void AddSquares()
+    {
+        Squares++;
+        CheckIfWon();
     }
     public void GameOver()
     {
         Alive = false;
         GameMenuController.Instance.OpenGameOverPanel();
+    }
+    public void LevelWon()
+    {
+
     }
 }

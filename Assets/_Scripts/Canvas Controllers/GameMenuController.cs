@@ -12,12 +12,11 @@ public class GameMenuController : MonoBehaviour
     public GameObject GameOverPanel;
 
     [Space(10)]
-    public RectTransform Health;
+    //public RectTransform Health;
     public Text TimeText;
-    public Text ScoreText;
-
-    [Header("Prefabs")]
-    public GameObject HealthImage;
+    public Text CirclesText;
+    public Text SquaresText;
+    //public GameObject HealthImage;
 
     private List<GameObject> _healthPacks = new List<GameObject>();
 
@@ -30,7 +29,7 @@ public class GameMenuController : MonoBehaviour
     void Start()
     {
         CloseGameOverPanel();
-        UpdateHealthPacks();
+        //UpdateHealthPacks();
     }
 
     // Update is called once per frame
@@ -49,25 +48,11 @@ public class GameMenuController : MonoBehaviour
     }
     void UpdateScore()
     {
-        ScoreText.text = LevelController.Instance.Score.ToString();
+        CirclesText.text = LevelController.Instance.Circles.ToString();
+        SquaresText.text = LevelController.Instance.Squares.ToString();
     }
     public void UpdateHealthPacks()
     {
-        foreach (var item in _healthPacks)
-        {
-            Destroy(item);
-        }
-        _healthPacks = new List<GameObject>();
-        for (int i = 0; i < LevelController.Instance.Health; i++)
-        {
-            GameObject health = Instantiate(HealthImage);
-            _healthPacks.Add(health);
-            health.transform.SetParent(Health);
-            health.transform.localPosition = Vector3.zero;
-            RectTransform healthTransform = health.GetComponent<RectTransform>();
-            healthTransform.anchoredPosition = new Vector2(48 + i * 80, 0);
-            healthTransform.localScale = new Vector3(1, 1, 1);
-        }
     }
     public void OpenGameOverPanel()
     {

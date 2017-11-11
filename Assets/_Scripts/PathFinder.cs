@@ -33,17 +33,20 @@ public class PathFinder : MonoBehaviour
     private void Update()
     {
         _targetNode = GetTargetNode();
-        if (RoundVector(transform.position) != _center)
+        if (RoundVector(transform.position) != _center || _searchInterval <= 0)
         {
-            StartCoroutine(InitializeNodes());
+            InitializeNodes();
             UpdatePath();
+
+            _searchInterval = 1;
         }
         if (Path.Count == 0 || _targetNode != null && Path.Count > 0 && Path[Path.Count - 1].Position != RoundVector(_targetNode.Position))
         {
             InitializeNodes();
             UpdatePath();
         }
-       
+        _searchInterval -= Time.deltaTime;
+
     }
     void UpdatePath()
     {
@@ -196,7 +199,7 @@ public class PathFinder : MonoBehaviour
         }
         return neighbours;
     }
-    IEnumerator InitializeNodes()
+    void InitializeNodes()
     {
         _nodes = new Dictionary<Vector2, Node>();
         float radius = Radius;
@@ -224,7 +227,7 @@ public class PathFinder : MonoBehaviour
                 if (!_nodes.ContainsKey(position))
                     _nodes.Add(position, node);
             }
-            yield return null;
+            //yield return null;
         }
     }
     Vector2 RoundVector(Vector2 position)

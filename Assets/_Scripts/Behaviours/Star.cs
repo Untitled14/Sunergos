@@ -23,8 +23,15 @@ public class Star : MonoBehaviour {
         {
             if(collision.tag == item)
             {
+                if(item == "Circle")
+                {
+                    LevelController.Instance.AddCircles();
+                }else if(item == "Square")
+                {
+                    LevelController.Instance.AddSquares();
+                }
                 LevelController.Instance.AddScore(Score);
-                LevelController.Instance.AddStar();
+                
                 Destroy(gameObject);
                 break;
             }
