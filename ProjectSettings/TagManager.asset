@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Ground
+  - Square
+  - Circle
+  - Platform
+  - Hazard
+  - Lava
+  - Star
+  - Crushinator
+  - Ignore
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Pressure Plate
+  - Walls
+  - Players
+  - Boxes
+  - Particles
+  - Platforms
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 845646123
+    locked: 0
+  - name: Background Map
+    uniqueID: 746855611
+    locked: 0
+  - name: Levers
+    uniqueID: 3009420251
+    locked: 0
+  - name: Game
+    uniqueID: 522146003
+    locked: 0
+  - name: Walls
+    uniqueID: 3917146791
+    locked: 0
+  - name: Foreground
+    uniqueID: 3505098431
+    locked: 0
+  - name: UI
+    uniqueID: 1944056165
+    locked: 0
