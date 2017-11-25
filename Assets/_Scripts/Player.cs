@@ -109,7 +109,7 @@ public class Player : AbstractGameObject
         if (!IsTakingDamage)
         {
             LevelController.Instance.TakeDamage();
-            if (LevelController.Instance.Alive && LevelController.Instance.LevelTime - LevelController.Instance.TimePassed > 0)
+            if (LevelController.Instance.Alive && LevelController.Instance.TimeLeft > 0)
             {
                 _rb.velocity = direction * force;
                 DamageAnimation();

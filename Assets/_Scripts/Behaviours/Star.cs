@@ -30,7 +30,7 @@ public class Star : MonoBehaviour {
                 {
                     LevelController.Instance.AddSquares();
                 }
-                LevelController.Instance.AddScore(Score);
+                LevelController.Instance.AddTime(10);
                 
                 Destroy(gameObject);
                 break;

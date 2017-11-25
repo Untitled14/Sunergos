@@ -12,6 +12,10 @@ public class LevelController : MonoBehaviour {
     public GameObject Player_1;
     public GameObject Player_2;
 
+    [Space(10)]
+    public GameObject SquareExit;
+    public GameObject CircleExit;
+
     public int MaxSquares = 1;
     public int MaxCircles = 1;
     [HideInInspector]
@@ -24,6 +28,11 @@ public class LevelController : MonoBehaviour {
     [HideInInspector]
     public float TimePassed = 0;
 
+    [HideInInspector]
+    public float ExtraTime = 0;
+
+    [HideInInspector]
+    public float TimeLeft = 0;
     public int MaxHealth = 3;
 
     [HideInInspector]
@@ -61,12 +70,16 @@ public class LevelController : MonoBehaviour {
 	void Update () {
         UpdateTime();
 
-        if(_exit != null)
+        if(Vector2.Distance(Player_2.transform.position, SquareExit.transform.position) < 0.2f
+            && Vector2.Distance(Player_1.transform.position, CircleExit.transform.position) < 0.2f
+            && !_levelOver)
         {
-            if(_exit.Triggered && !_levelOver)
-            {
-                LevelWon();
-            }
+            LevelWon();
+        }
+        if(_levelOver)
+        {
+            Player_2.transform.position = SquareExit.transform.position;
+            Player_1.transform.position = CircleExit.transform.position;
         }
 	}
     void CheckIfWon()
@@ -79,10 +92,16 @@ public class LevelController : MonoBehaviour {
     }
     void UpdateTime()
     {
+
         if(Alive)
             TimePassed += Time.deltaTime;
-        if (TimePassed >= LevelTime)
+        TimeLeft = LevelTime - TimePassed + ExtraTime;
+        if (TimeLeft <= 0)
+        {
+            TimeLeft = 0;
             GameOver();
+        }
+        
     }
     public void TakeDamage()
     {
@@ -93,6 +112,7 @@ public class LevelController : MonoBehaviour {
         //    GameOver();
         //}
         TimePassed += 15;
+        UpdateTime();
     }
     public void AddScore(int score)
     {
@@ -108,6 +128,10 @@ public class LevelController : MonoBehaviour {
         Squares++;
         CheckIfWon();
     }
+    public void AddTime(float time)
+    {
+        ExtraTime += time;
+    }
     public void GameOver()
     {
         Alive = false;
@@ -118,7 +142,7 @@ public class LevelController : MonoBehaviour {
     {
         Alive = false;
         _levelOver = true;
-        Score = (int)LevelTime - (int)TimePassed + (Circles + Squares) * 10;
+        Score = (int)LevelTime - (int)TimePassed + (int)ExtraTime;
         GameMenuController.Instance.OpenGameWonPanel();
     }
 }

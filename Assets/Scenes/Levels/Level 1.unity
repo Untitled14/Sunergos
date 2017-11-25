@@ -299,6 +299,8 @@ MonoBehaviour:
   Squares: 0
   LevelTime: 300
   TimePassed: 0
+  ExtraTime: 0
+  TimeLeft: 0
   MaxHealth: 3
   Players: []
   LevelNumber: 0
