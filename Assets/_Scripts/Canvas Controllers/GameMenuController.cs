@@ -71,10 +71,14 @@ public class GameMenuController : MonoBehaviour
     }
     void OpenPausePanel()
     {
+        Time.timeScale = 0;
+        LevelController.Instance.Paused = true;
         PausePanel.SetActive(true);
     }
     public void ClosePausePanel()
     {
+        Time.timeScale = 1;
+        LevelController.Instance.Paused = false;
         PausePanel.SetActive(false);
     }
     public void OpenGameOverPanel()

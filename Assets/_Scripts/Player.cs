@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : AbstractGameObject
 {
     public int ID;
     public float MaxSpeed = 4;
@@ -41,18 +42,6 @@ public class Player : MonoBehaviour
         _sr = GetComponent<SpriteRenderer>();
         _ha = GetComponent<HeatAnimation>();
         _spriteColor = _sr.color;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //Grounded = IsGrounded();
-        UpdateActionKey();
-        UpdateMovement();
-        UpdateJump();
-        UpdatePose();
-        OriginVelocity = Vector2.zero;
-        Grounded = IsGrounded();
     }
     void UpdatePose()
     {
@@ -191,5 +180,16 @@ public class Player : MonoBehaviour
         }
         _sr.color = _spriteColor;
         IsTakingDamage = false;
+    }
+
+    public override void UpdateGame()
+    {
+        //Grounded = IsGrounded();
+        UpdateActionKey();
+        UpdateMovement();
+        UpdateJump();
+        UpdatePose();
+        OriginVelocity = Vector2.zero;
+        Grounded = IsGrounded();
     }
 }
