@@ -72,7 +72,7 @@ public class LevelController : MonoBehaviour {
 
         if(SquareExit == null || CircleExit == null)
         {
-            Debug.LogError("Level doesn't have an exit");
+            Debug.Log("Level doesn't have an exit");
             return;
         }
         if(Vector2.Distance(Player_2.transform.position, SquareExit.transform.position) < 0.2f
