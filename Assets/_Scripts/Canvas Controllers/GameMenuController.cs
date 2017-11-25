@@ -121,11 +121,14 @@ public class GameMenuController : MonoBehaviour
     public void PlayNextLevel()
     {
         string sceneName = "Level " + (LevelController.Instance.LevelNumber + 1);
-        if (SceneManager.GetSceneByName(sceneName).IsValid())
+        if (Application.CanStreamedLevelBeLoaded(sceneName))
         {
             SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
         }
-        
+        else
+        {
+            Debug.Log("No more scenes");
+        }
     }
     public void PlayAgain()
     {
