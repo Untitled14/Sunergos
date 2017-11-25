@@ -120,7 +120,12 @@ public class GameMenuController : MonoBehaviour
     }
     public void PlayNextLevel()
     {
-        SceneManager.LoadScene("Level " + (LevelController.Instance.LevelNumber + 1), LoadSceneMode.Single);
+        string sceneName = "Level " + (LevelController.Instance.LevelNumber + 1);
+        if (SceneManager.GetSceneByName(sceneName).IsValid())
+        {
+            SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+        }
+        
     }
     public void PlayAgain()
     {
