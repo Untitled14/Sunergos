@@ -93,7 +93,6 @@ public class LevelController : MonoBehaviour {
         //    GameOver();
         //}
         TimePassed += 15;
-        GameMenuController.Instance.UpdateHealthPacks();
     }
     public void AddScore(int score)
     {

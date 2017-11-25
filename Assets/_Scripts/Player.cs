@@ -109,7 +109,7 @@ public class Player : AbstractGameObject
         if (!IsTakingDamage)
         {
             LevelController.Instance.TakeDamage();
-            if (LevelController.Instance.Alive)
+            if (LevelController.Instance.Alive && LevelController.Instance.LevelTime - LevelController.Instance.TimePassed > 0)
             {
                 _rb.velocity = direction * force;
                 DamageAnimation();
@@ -181,7 +181,6 @@ public class Player : AbstractGameObject
         _sr.color = _spriteColor;
         IsTakingDamage = false;
     }
-
     public override void UpdateGame()
     {
         //Grounded = IsGrounded();

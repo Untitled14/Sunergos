@@ -83,7 +83,7 @@ public class GameMenuController : MonoBehaviour
     }
     public void OpenGameOverPanel()
     {
-        Time.timeScale = 0;
+        Time.timeScale = 0.5f;
         LevelController.Instance.Paused = true;
 
         GameOverPanel.SetActive(true);
@@ -98,7 +98,7 @@ public class GameMenuController : MonoBehaviour
     }
     public void OpenGameWonPanel()
     {
-        Time.timeScale = 0;
+        Time.timeScale = 0.5f;
         LevelController.Instance.Paused = true;
 
         GameWonTextScore.text = "Score: " + LevelController.Instance.Score.ToString();

@@ -14,9 +14,10 @@ public abstract class Trigger : MonoBehaviour {
     }
     public void TurnOff()
     {
-        On = false;
         if (Permament)
-            On = true;
+            return;
+        On = false;
+       
     }
     public void Toggle()
     {
