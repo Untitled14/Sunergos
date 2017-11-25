@@ -32,9 +32,13 @@ public class MenuController : MonoBehaviour {
     }
     public void LoadLevel(string level)
     {
-        if (SceneManager.GetSceneByName(level).IsValid())
+        if (Application.CanStreamedLevelBeLoaded(level))
         {
             SceneManager.LoadScene(level, LoadSceneMode.Single);
+        }
+        else
+        {
+            Debug.Log("Scene '" + level +"' does not exist");
         }
     }
     public void NewGame()
