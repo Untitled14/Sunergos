@@ -70,6 +70,11 @@ public class LevelController : MonoBehaviour {
 	void Update () {
         UpdateTime();
 
+        if(SquareExit == null || CircleExit == null)
+        {
+            Debug.LogError("Level doesn't have an exit");
+            return;
+        }
         if(Vector2.Distance(Player_2.transform.position, SquareExit.transform.position) < 0.2f
             && Vector2.Distance(Player_1.transform.position, CircleExit.transform.position) < 0.2f
             && !_levelOver)
