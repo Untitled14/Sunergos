@@ -83,17 +83,24 @@ public class GameMenuController : MonoBehaviour
     }
     public void OpenGameOverPanel()
     {
+        Time.timeScale = 0;
+        LevelController.Instance.Paused = true;
+
         GameOverPanel.SetActive(true);
         GamePanel.SetActive(false);
     }
     public void CloseGameOverPanel()
     {
+
         GamePanel.SetActive(true);
         GameOverPanel.SetActive(false);
         GameWonPanel.SetActive(false);
     }
     public void OpenGameWonPanel()
     {
+        Time.timeScale = 0;
+        LevelController.Instance.Paused = true;
+
         GameWonTextScore.text = "Score: " + LevelController.Instance.Score.ToString();
         GameOverPanel.SetActive(false);
         GameWonPanel.SetActive(true);
