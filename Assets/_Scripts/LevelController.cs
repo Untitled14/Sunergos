@@ -8,7 +8,7 @@ public class LevelController : MonoBehaviour {
 
     [HideInInspector]
     public bool Alive = true;
-
+    public bool Paused;
     public GameObject Player_1;
     public GameObject Player_2;
 

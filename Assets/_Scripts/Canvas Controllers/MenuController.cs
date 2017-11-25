@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class MenuController : MonoBehaviour {
 
     public GameObject MainMenuPanel;
+    public GameObject CreditsPanel;
     public GameObject LevelsPanel;
 
     public RectTransform LevelContent;
@@ -16,13 +17,19 @@ public class MenuController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         OpenMainMenuWindow();
-
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        UpdateInputs();
+    }
+    void UpdateInputs()
+    {
+        if (Input.GetButtonDown("Cancel"))
+        {
+            OpenMainMenuWindow();
+        }
+    }
     public void LoadLevel(string level)
     {
         SceneManager.LoadScene(level, LoadSceneMode.Single);
@@ -35,12 +42,17 @@ public class MenuController : MonoBehaviour {
     {
         MainMenuPanel.SetActive(false);
         LevelsPanel.SetActive(true);
-        
     }
     public void OpenMainMenuWindow()
     {
         MainMenuPanel.SetActive(true);
         LevelsPanel.SetActive(false);
+        CreditsPanel.SetActive(false);
+    }
+    public void OpenCreditsWindow()
+    {
+        MainMenuPanel.SetActive(false);
+        CreditsPanel.SetActive(true);
     }
     public void ExitGame()
     {

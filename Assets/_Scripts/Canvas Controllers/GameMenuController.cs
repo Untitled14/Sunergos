@@ -11,6 +11,7 @@ public class GameMenuController : MonoBehaviour
     public GameObject GamePanel;
     public GameObject GameOverPanel;
     public GameObject GameWonPanel;
+    public GameObject PausePanel;
 
     [Space(10)]
     //public RectTransform Health;
@@ -31,12 +32,14 @@ public class GameMenuController : MonoBehaviour
     void Start()
     {
         CloseGameOverPanel();
+        ClosePausePanel();
         //UpdateHealthPacks();
     }
 
     // Update is called once per frame
     void Update()
     {
+        UpdateInputs();
         if (TimeText != null)
             UpdateTime();
         UpdateScore();
@@ -53,8 +56,26 @@ public class GameMenuController : MonoBehaviour
         CirclesText.text = LevelController.Instance.Circles.ToString();
         SquaresText.text = LevelController.Instance.Squares.ToString();
     }
+    void UpdateInputs()
+    {
+        if(Input.GetButtonDown("Cancel"))
+        {
+            if (PausePanel.activeSelf)
+                ClosePausePanel();
+            else
+                OpenPausePanel();
+        }
+    }
     public void UpdateHealthPacks()
     {
+    }
+    void OpenPausePanel()
+    {
+        PausePanel.SetActive(true);
+    }
+    public void ClosePausePanel()
+    {
+        PausePanel.SetActive(false);
     }
     public void OpenGameOverPanel()
     {
@@ -69,7 +90,7 @@ public class GameMenuController : MonoBehaviour
     }
     public void OpenGameWonPanel()
     {
-        GameWonTextScore.text = LevelController.Instance.Score.ToString();
+        GameWonTextScore.text = "Score: " + LevelController.Instance.Score.ToString();
         GameOverPanel.SetActive(false);
         GameWonPanel.SetActive(true);
         GamePanel.SetActive(false);
