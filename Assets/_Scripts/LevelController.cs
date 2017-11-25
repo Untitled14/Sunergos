@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour {
     public static LevelController Instance;
@@ -32,26 +33,46 @@ public class LevelController : MonoBehaviour {
     [HideInInspector]
     public List<Player> Players;
 
+    private TriggerConnection _exit;
+    private bool _levelOver;
+
+    [HideInInspector]
+    public int LevelNumber;
+
     private void Awake()
     {
         Instance = this;
     }
     // Use this for initialization
     void Start () {
+        string sceneName = SceneManager.GetActiveScene().name;
+        LevelNumber = int.Parse(sceneName.Split(' ')[1]);
+
         Players.Add(Player_1.GetComponent<Player>());
         Players.Add(Player_2.GetComponent<Player>());
 
         _health = MaxHealth;
+
+        _exit = GetComponent<TriggerConnection>();
         GameMenuController.Instance.UpdateHealthPacks();
     }
 	
 	// Update is called once per frame
 	void Update () {
         UpdateTime();
+
+        if(_exit != null)
+        {
+            if(_exit.Triggered && !_levelOver)
+            {
+                LevelWon();
+            }
+        }
 	}
     void CheckIfWon()
     {
-        if(Circles >= MaxCircles && Squares >= MaxSquares)
+        return;
+        if(Circles >= MaxCircles && Squares >= MaxSquares && !_levelOver)
         {
             GameOver();
         }
@@ -91,10 +112,14 @@ public class LevelController : MonoBehaviour {
     public void GameOver()
     {
         Alive = false;
+        _levelOver = true;
         GameMenuController.Instance.OpenGameOverPanel();
     }
     public void LevelWon()
     {
-
+        Alive = false;
+        _levelOver = true;
+        Score = (int)LevelTime - (int)TimePassed + (Circles + Squares) * 10;
+        GameMenuController.Instance.OpenGameWonPanel();
     }
 }

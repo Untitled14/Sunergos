@@ -10,6 +10,7 @@ public class GameMenuController : MonoBehaviour
     [Header("Canvas objects")]
     public GameObject GamePanel;
     public GameObject GameOverPanel;
+    public GameObject GameWonPanel;
 
     [Space(10)]
     //public RectTransform Health;
@@ -17,7 +18,8 @@ public class GameMenuController : MonoBehaviour
     public Text CirclesText;
     public Text SquaresText;
     //public GameObject HealthImage;
-
+    [Space(10)]
+    public Text GameWonTextScore;
     private List<GameObject> _healthPacks = new List<GameObject>();
 
     private void Awake()
@@ -63,14 +65,27 @@ public class GameMenuController : MonoBehaviour
     {
         GamePanel.SetActive(true);
         GameOverPanel.SetActive(false);
+        GameWonPanel.SetActive(false);
+    }
+    public void OpenGameWonPanel()
+    {
+        GameWonTextScore.text = LevelController.Instance.Score.ToString();
+        GameOverPanel.SetActive(false);
+        GameWonPanel.SetActive(true);
+        GamePanel.SetActive(false);
     }
     public void ExitToMenu()
     {
         SceneManager.LoadScene("Game", LoadSceneMode.Single);
     }
+    public void PlayNextLevel()
+    {
+        SceneManager.LoadScene("Level " + (LevelController.Instance.LevelNumber + 1), LoadSceneMode.Single);
+    }
     public void PlayAgain()
     {
-        CloseGameOverPanel();
+        //CloseGameOverPanel();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
     }
+    
 }
