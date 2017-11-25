@@ -2162,7 +2162,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 3.8000002, y: 29.099998}
+  m_AnchoredPosition: {x: 3.8000002, y: 29.099976}
   m_SizeDelta: {x: 136.87, y: 43.199997}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224018942182769512
@@ -2217,10 +2217,10 @@ RectTransform:
   m_Father: {fileID: 224986617927908826}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -322.1, y: -181.2}
+  m_SizeDelta: {x: 477.9, y: 268.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224068584608919600
 RectTransform:
@@ -2371,10 +2371,10 @@ RectTransform:
   m_Father: {fileID: 224625678916693750}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -322.1, y: -181.2}
+  m_SizeDelta: {x: 477.9, y: 268.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224270629764639370
 RectTransform:
@@ -2395,10 +2395,10 @@ RectTransform:
   m_Father: {fileID: 224918507684430632}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 184.69998}
-  m_SizeDelta: {x: 0, y: -369.3}
+  m_AnchoredPosition: {x: 0, y: -40.30002}
+  m_SizeDelta: {x: 0, y: 80.70001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224357481019221380
 RectTransform:
@@ -2563,7 +2563,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 73.3, y: 29.100014}
+  m_AnchoredPosition: {x: 73.29999, y: 29.100037}
   m_SizeDelta: {x: 129.41, y: 43.199997}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224698624083767084
