@@ -76,7 +76,15 @@ public class LevelController : MonoBehaviour {
         {
             LevelWon();
         }
-        if(_levelOver)
+        if(Vector2.Distance(Player_2.transform.position, SquareExit.transform.position) < 0.8f)
+        {
+            Player_2.transform.position = Vector2.MoveTowards(Player_2.transform.position, SquareExit.transform.position, 1 * Time.deltaTime);
+        }
+        if (Vector2.Distance(Player_1.transform.position, CircleExit.transform.position) < 0.8f)
+        {
+            Player_1.transform.position = Vector2.MoveTowards(Player_1.transform.position, CircleExit.transform.position, 1 * Time.deltaTime);
+        }
+        if (_levelOver)
         {
             Player_2.transform.position = SquareExit.transform.position;
             Player_1.transform.position = CircleExit.transform.position;
