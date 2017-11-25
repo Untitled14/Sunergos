@@ -32,7 +32,10 @@ public class MenuController : MonoBehaviour {
     }
     public void LoadLevel(string level)
     {
-        SceneManager.LoadScene(level, LoadSceneMode.Single);
+        if (SceneManager.GetSceneByName(level).IsValid())
+        {
+            SceneManager.LoadScene(level, LoadSceneMode.Single);
+        }
     }
     public void NewGame()
     {
