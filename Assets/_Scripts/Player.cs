@@ -164,6 +164,13 @@ public class Player : AbstractGameObject
     {
         _jumpCount = JumpCount - 2;
     }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Crushinator")
+        {
+            Die();
+        }
+    }
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Crushinator")

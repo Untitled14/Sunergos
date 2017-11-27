@@ -32,21 +32,23 @@ public class PathFinder : MonoBehaviour
     }
     private void Update()
     {
-        _targetNode = GetTargetNode();
-        if (RoundVector(transform.position) != _center || _searchInterval <= 0)
+        if (Target != null)
         {
-            InitializeNodes();
-            UpdatePath();
+            _targetNode = GetTargetNode();
+            if (RoundVector(transform.position) != _center || _searchInterval <= 0)
+            {
+                InitializeNodes();
+                UpdatePath();
 
-            _searchInterval = 1;
+                _searchInterval = 1;
+            }
+            if (Path.Count == 0 || _targetNode != null && Path.Count > 0 && Path[Path.Count - 1].Position != RoundVector(_targetNode.Position))
+            {
+                InitializeNodes();
+                UpdatePath();
+            }
+            _searchInterval -= Time.deltaTime;
         }
-        if (Path.Count == 0 || _targetNode != null && Path.Count > 0 && Path[Path.Count - 1].Position != RoundVector(_targetNode.Position))
-        {
-            InitializeNodes();
-            UpdatePath();
-        }
-        _searchInterval -= Time.deltaTime;
-
     }
     void UpdatePath()
     {
