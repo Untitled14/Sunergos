@@ -69,6 +69,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Score: 1
+  MovingSpeed: 25
+  YDistance: 0.25
   PlayerTag:
   - Circle
 --- !u!212 &212164813500205426

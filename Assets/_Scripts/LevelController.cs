@@ -48,6 +48,7 @@ public class LevelController : MonoBehaviour {
     [HideInInspector]
     public int LevelNumber;
 
+    public AudioSource LevelMusic;
     private void Awake()
     {
         Instance = this;
@@ -64,6 +65,9 @@ public class LevelController : MonoBehaviour {
 
         _exit = GetComponent<TriggerConnection>();
         GameMenuController.Instance.UpdateHealthPacks();
+
+        if (LevelMusic != null)
+            LevelMusic.Play();
     }
 	
 	// Update is called once per frame
@@ -75,24 +79,27 @@ public class LevelController : MonoBehaviour {
             Debug.Log("Level doesn't have an exit");
             return;
         }
-        if(Vector2.Distance(Player_2.transform.position, SquareExit.transform.position) < 0.2f
-            && Vector2.Distance(Player_1.transform.position, CircleExit.transform.position) < 0.2f
-            && !_levelOver)
+        if (Player_1 != null && Player_2 != null)
         {
-            LevelWon();
-        }
-        if(Vector2.Distance(Player_2.transform.position, SquareExit.transform.position) < 0.8f)
-        {
-            Player_2.transform.position = Vector2.MoveTowards(Player_2.transform.position, SquareExit.transform.position, 1 * Time.deltaTime);
-        }
-        if (Vector2.Distance(Player_1.transform.position, CircleExit.transform.position) < 0.8f)
-        {
-            Player_1.transform.position = Vector2.MoveTowards(Player_1.transform.position, CircleExit.transform.position, 1 * Time.deltaTime);
-        }
-        if (_levelOver)
-        {
-            Player_2.transform.position = SquareExit.transform.position;
-            Player_1.transform.position = CircleExit.transform.position;
+            if (Vector2.Distance(Player_2.transform.position, SquareExit.transform.position) < 0.2f
+                && Vector2.Distance(Player_1.transform.position, CircleExit.transform.position) < 0.2f
+                && !_levelOver)
+            {
+                LevelWon();
+            }
+            if (Vector2.Distance(Player_2.transform.position, SquareExit.transform.position) < 0.8f)
+            {
+                Player_2.transform.position = Vector2.MoveTowards(Player_2.transform.position, SquareExit.transform.position, 1 * Time.deltaTime);
+            }
+            if (Vector2.Distance(Player_1.transform.position, CircleExit.transform.position) < 0.8f)
+            {
+                Player_1.transform.position = Vector2.MoveTowards(Player_1.transform.position, CircleExit.transform.position, 1 * Time.deltaTime);
+            }
+            if (_levelOver)
+            {
+                Player_2.transform.position = Vector2.MoveTowards(Player_2.transform.position, SquareExit.transform.position, 1 * Time.deltaTime);
+                Player_1.transform.position = Vector2.MoveTowards(Player_1.transform.position, CircleExit.transform.position, 1 * Time.deltaTime);
+            }
         }
 	}
     void CheckIfWon()
@@ -147,12 +154,17 @@ public class LevelController : MonoBehaviour {
     }
     public void GameOver()
     {
+        if (LevelMusic != null)
+            LevelMusic.Stop();
         Alive = false;
         _levelOver = true;
         GameMenuController.Instance.OpenGameOverPanel();
     }
     public void LevelWon()
     {
+        if (LevelMusic != null)
+            LevelMusic.Stop();
+        AudioController.Instance.PlaySound("level completed", 0);
         Alive = false;
         _levelOver = true;
         Score = (int)LevelTime - (int)TimePassed + (int)ExtraTime;

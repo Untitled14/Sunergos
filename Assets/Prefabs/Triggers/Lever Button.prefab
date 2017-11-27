@@ -187,6 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1838ade36c3f3d4dae0ed92812d0325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AudioSource: lever button
   Active: 1
   On: 0
   Permament: 0

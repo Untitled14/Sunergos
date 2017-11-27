@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Trigger : MonoBehaviour {
+    public string AudioSource = "";
     public bool Active = true;
     public bool On;
     public bool Permament;
@@ -11,13 +12,14 @@ public abstract class Trigger : MonoBehaviour {
         if (!Active)
             return;
         On = true;
+        AudioController.Instance.PlaySound(AudioSource, 0.02f);
     }
     public void TurnOff()
     {
         if (Permament)
             return;
         On = false;
-       
+        AudioController.Instance.PlaySound(AudioSource, 0.02f);
     }
     public void Toggle()
     {
@@ -26,5 +28,6 @@ public abstract class Trigger : MonoBehaviour {
         On = !On;
         if (Permament)
             On = true;
+        AudioController.Instance.PlaySound(AudioSource, 0.02f);
     }
 }

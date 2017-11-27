@@ -12,7 +12,9 @@ public class GameMenuController : MonoBehaviour
     public GameObject GameOverPanel;
     public GameObject GameWonPanel;
     public GameObject PausePanel;
-
+    public Image DamagedImage;
+    private Color _damageImageColor;
+    private bool _showDamagedImage;
     [Space(10)]
     //public RectTransform Health;
     public Text TimeText;
@@ -24,6 +26,9 @@ public class GameMenuController : MonoBehaviour
     public Text GameWonTimeText;
     private List<GameObject> _healthPacks = new List<GameObject>();
 
+    private float _t = 0;
+    private float _menuT = 0;
+
     private void Awake()
     {
         Instance = this;
@@ -32,6 +37,9 @@ public class GameMenuController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        _damageImageColor = DamagedImage.color;
+        DamagedImage.gameObject.SetActive(false);
+
         CloseGameOverPanel();
         ClosePausePanel();
         //UpdateHealthPacks();
@@ -44,6 +52,7 @@ public class GameMenuController : MonoBehaviour
         if (TimeText != null)
             UpdateTime();
         UpdateScore();
+        UpdateDamageImage();
     }
     void UpdateTime()
     {
@@ -91,7 +100,12 @@ public class GameMenuController : MonoBehaviour
     {
         Time.timeScale = 0.5f;
         LevelController.Instance.Paused = true;
-
+        StartCoroutine(OpenGameOverDelay());
+       
+    }
+    IEnumerator OpenGameOverDelay()
+    {
+        yield return new WaitForSeconds(1);
         GameOverPanel.SetActive(true);
         GamePanel.SetActive(false);
     }
@@ -109,11 +123,12 @@ public class GameMenuController : MonoBehaviour
 
         GameWonTimeText.text = "Time: " + FormatTime(LevelController.Instance.TimePassed);
         GameWonTextScore.text = "Score: " + LevelController.Instance.Score.ToString();
-        
+       
         GameOverPanel.SetActive(false);
         GameWonPanel.SetActive(true);
         GamePanel.SetActive(false);
     }
+    
     public void ExitToMenu()
     {
         SceneManager.LoadScene("Game", LoadSceneMode.Single);
@@ -135,5 +150,27 @@ public class GameMenuController : MonoBehaviour
         //CloseGameOverPanel();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
     }
-    
+
+    void UpdateDamageImage()
+    {
+        if (_showDamagedImage)
+        {
+            Color newColor = _damageImageColor;
+            newColor.a = 0;
+            DamagedImage.color = Color.Lerp(_damageImageColor, newColor, _t);
+            _t += Time.deltaTime * 2;
+            if (_t >= 1)
+            {
+                _showDamagedImage = false;
+                DamagedImage.gameObject.SetActive(false);
+            }
+        }
+    }
+    public void ShowDamagePlayerImage()
+    {
+        _showDamagedImage = true;
+        DamagedImage.gameObject.SetActive(true);
+        _t = 0;
+    }
+
 }

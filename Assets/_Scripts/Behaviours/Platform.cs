@@ -26,6 +26,8 @@ public class Platform : MonoBehaviour
 
     private Vector2 _destination;
     private Vector2 _current;
+
+    private bool _canPlaySound = true;
     // Use this for initialization
     void Start()
     {
@@ -66,6 +68,16 @@ public class Platform : MonoBehaviour
             Position = OnPosition;
         else
             Position = OffPosition;
+
+        if(_currentPosition != Position && _canPlaySound)
+        {
+            AudioController.Instance.PlaySound("platform open", 0);
+            _canPlaySound = false;
+        }
+        else
+        {
+            _canPlaySound = true;
+        }
     }
     void MoveTowards()
     {

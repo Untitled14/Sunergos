@@ -59,7 +59,9 @@ public class Hazard : MonoBehaviour
     }
     void Die()
     {
+        AudioController.Instance.PlaySound("enemy die", 0.2f);
         LevelController.Instance.AddScore(Score);
+        ParticleController.Instance.SpawnParticles("enemy death 1", transform.position);
         Destroy(gameObject);
     }
 }

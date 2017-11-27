@@ -19,6 +19,8 @@ public class CameraController : MonoBehaviour {
 
     private Camera _cam;
     private float _initialSize;
+
+    private bool _isFixedPosition;
     private void Awake()
     {
         Instance = this;
@@ -36,7 +38,11 @@ public class CameraController : MonoBehaviour {
 	void Update () {
         UpdateVariables();
         if (LevelController != null && LevelController.Alive)
-            UpdateCamera();	
+        {
+            if(!_isFixedPosition)
+                UpdateCamera();
+
+        }
 	}
     void UpdateVariables()
     {
@@ -58,5 +64,14 @@ public class CameraController : MonoBehaviour {
         newCameraPosition.z = -10;
         //newCameraPosition += (Vector3)CameraPosition;
         transform.position = newCameraPosition;
+    }
+    void UpdateCameraFixed()
+    {
+
+    }
+    private void SetCameraPosition(Vector2 position)
+    {
+
+
     }
 }
