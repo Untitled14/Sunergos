@@ -203,14 +203,16 @@ public class PathFinder : MonoBehaviour
     {
         _nodes = new Dictionary<Vector2, Node>();
         float radius = Radius;
+        float targetDirectionX = Mathf.Sign(Target.transform.position.x - transform.position.x);
         _center = RoundVector(transform.position);
+        _center.x += targetDirectionX * radius;
         for (int y = 0; y <= radius * 2; y++)
         {
             for (int x = 0; x <= radius * 2; x++)
             {
                 Vector2 position = RoundVector(new Vector2(
-                    transform.position.x + x - radius,
-                    transform.position.y + y - radius
+                    _center.x + x - radius,
+                    _center.y + y - radius
                     ));
                 Node node = new Node(position);
                 var hits = Physics2D.OverlapCircleAll(position, 0.5f);
